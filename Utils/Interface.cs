@@ -21,6 +21,7 @@ namespace PowerConvert.Utils
 
         public static void PrintArt()
         {
+            Console.CursorVisible = false;
             int WidthSum = (Console.WindowWidth - ArtString1.Length) / 2;
             int CredisWidthSum = (Console.WindowWidth - CreditsString.Length) / 2;
             int TopSum = Console.CursorTop;
@@ -40,7 +41,7 @@ namespace PowerConvert.Utils
             Console.Write(Globals.ToolName, Color.OrangeRed);
             Console.Write(" by ", Color.White);
             Console.Write(Globals.Author, Color.OrangeRed);
-            Console.Write(" ~ ", Color.White);
+            Console.Write(" ~", Color.White);
             Console.Write(" Version ", Color.OrangeRed);
             Console.Write(Globals.Version +"\n\n", Color.White);
         }

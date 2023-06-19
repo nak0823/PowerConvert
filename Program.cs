@@ -1,7 +1,7 @@
 ﻿using PowerConvert.Utils;
 using System;
+using System.Drawing;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace PowerConvert
 {
@@ -11,15 +11,32 @@ namespace PowerConvert
         {
             Console.Title = $"{Globals.ToolName} by {Globals.Author} ~ Version {Globals.Version}";
             Interface.PrintArt();
+            switch (IsNewestVersion())
+            {
+                case true:
+                    //Interface.Prefix("!", "Program Is Up To Date!\n", Color.Green);
+                    break;
+                case false:
+                    Interface.Prefix("!", "Program Is Outdated. Please Download The Newest Version!\n", Color.Red);
+                    break;
+            }
+
+            ConfigHelper.DirectoryCheck();
             Menu.MainMenu();
+
 
             Console.ReadKey();
         }
 
-        private static async Task UpdateCheck()
+        private static bool IsNewestVersion()
         {
             WebClient wc = new WebClient();
-            wc.DownloadData("")
+            var getVersion = wc.DownloadString("https://raw.githubusercontent.com/nak0823/PowerConvert/master/Version.txt");
+            wc.Dispose();
+            if (getVersion == Utils.Globals.Version)
+                return true;
+
+            return false;
         }
     }
 }
